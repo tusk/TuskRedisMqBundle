@@ -1,11 +1,10 @@
 parameters:
-#    tusk_redis_queue.example.class: Tusk\RedisQueueBundle\Example
+    tusk_redis_queue.connection.class:  Tusk\RedisQueue\Connection
+    tusk_redis_queue.producer.class:    Tusk\RedisQueue\Producer
+    tusk_redis_queue.consumer.class:    Tusk\RedisQueue\Consumer
+    tusk_redis_queue.rpc_factory.class: Tusk\RedisQueue\RpcFactory
+    tusk_redis_queue.monitor.class:     Tusk\RedisQueue\Monitor
+    
+services: ~
 
-services:
-#    tusk_redis_queue.example:
-#        class: %tusk_redis_queue.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
 
-    tusk_redis_queue.connection_abstract:
-        class:    Tusk\RedisQueue\Connection
-        abstract: true

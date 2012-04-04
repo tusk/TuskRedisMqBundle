@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Tusk RedisQueueBundle package.
+ *
+ * (c) 2012 Tusk PHP Components <frizzy@paperjaw.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Tusk\RedisQueueBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -23,7 +32,39 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('connections')
                     ->useAttributeAsKey('name')
+                    ->prototype('scalar')
+                    ->end()
+                ->end()
+                ->arrayNode('producers')
+                    ->useAttributeAsKey('name')
                     ->prototype('array')
+                        ->children()
+                            ->scalarNode('connection')->isRequired()->end()
+                            ->scalarNode('channel')->isRequired()->end()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('rpc')
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('connection')->isRequired()->end()
+                            ->scalarNode('listen_timeout')->end()
+                            ->scalarNode('response_timeout')->end()
+                            ->scalarNode('channel_expire')->end()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('consumers')
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
+                        ->children()
+                            ->scalarNode('connection')->isRequired()->end()
+                            ->scalarNode('channel')->isRequired()->end()
+                            ->arrayNode('callback')->isRequired()
+                                ->prototype('scalar')->end()
+                            ->end()
+                        ->end()
                     ->end()
                 ->end()
             ->end();
