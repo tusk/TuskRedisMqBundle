@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tusk RedisQueueBundle package.
+ * This file is part of the Tusk RedisMqBundle package.
  *
  * (c) 2012 Tusk PHP Components <frizzy@paperjaw.com>
  *
@@ -9,18 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Tusk\RedisQueueBundle;
+namespace Tusk\RedisMqBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Tusk\RedisQueueBundle\DependencyInjection\Compiler\ConsumerCompilerPass;
+use Tusk\RedisMqBundle\DependencyInjection\Compiler\ConsumerCompilerPass;
 
 /**
- * TuskRedisQueueBundle
+ * TuskRedisMqBundle
  *
  * @author Bernard van Niekerk <frizzy@paperjaw.com>
  */
-class TuskRedisQueueBundle extends Bundle
+class TuskRedisMqBundle extends Bundle
 {
     public function build(ContainerBuilder $container)
     {

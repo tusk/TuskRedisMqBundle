@@ -1,6 +1,6 @@
 <?php
 
-namespace Tusk\RedisQueueBundle\Tests\Controller;
+namespace Tusk\RedisMqBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

@@ -1,3 +1,3 @@
-TuskRedisQueueBundle_homepage:
+TuskRedisMqBundle_homepage:
     pattern:  /hello/{name}
-    defaults: { _controller: TuskRedisQueueBundle:Default:index }
+    defaults: { _controller: TuskRedisMqBundle:Default:index }

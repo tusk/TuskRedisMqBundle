@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tusk RedisQueueBundle package.
+ * This file is part of the Tusk RedisMqBundle package.
  *
  * (c) 2012 Tusk PHP Components <frizzy@paperjaw.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Tusk\RedisQueueBundle\Command;
+namespace Tusk\RedisMqBundle\Command;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -24,8 +24,8 @@ class StdInProducerCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('tusk-redis-queue:stdin-producer')
-            ->setDescription('TuskRedisQueue STDIN producer command')
+            ->setName('tusk-redis-mq:stdin-producer')
+            ->setDescription('TuskRedisMq STDIN producer command')
             ->addArgument('producer', InputArgument::REQUIRED, 'Producer name');
     }
 
@@ -33,7 +33,7 @@ class StdInProducerCommand extends ContainerAwareCommand
     {
         $producer = $this->getContainer()->get(
             sprintf(
-                'tusk_redis_queue.producer.%s',
+                'tusk_redis_mq.producer.%s',
                 $input->getArgument('producer')
             )
         );

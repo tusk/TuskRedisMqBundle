@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tusk RedisQueueBundle package.
+ * This file is part of the Tusk RedisMqBundle package.
  *
  * (c) 2012 Tusk PHP Components <frizzy@paperjaw.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Tusk\RedisQueueBundle\DependencyInjection;
+namespace Tusk\RedisMqBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -27,7 +27,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('tusk_redis_queue');
+        $rootNode = $treeBuilder->root('tusk_redis_mq');
         $rootNode
             ->children()
                 ->arrayNode('connections')

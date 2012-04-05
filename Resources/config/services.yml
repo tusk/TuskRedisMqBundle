@@ -1,9 +1,9 @@
 parameters:
-    tusk_redis_queue.connection.class:  Tusk\RedisQueue\Connection
-    tusk_redis_queue.producer.class:    Tusk\RedisQueue\Producer
-    tusk_redis_queue.consumer.class:    Tusk\RedisQueue\Consumer
-    tusk_redis_queue.rpc_factory.class: Tusk\RedisQueue\RpcFactory
-    tusk_redis_queue.monitor.class:     Tusk\RedisQueue\Monitor
+    tusk_redis_mq.connection.class:  Tusk\RedisMq\Connection
+    tusk_redis_mq.producer.class:    Tusk\RedisMq\Producer
+    tusk_redis_mq.consumer.class:    Tusk\RedisMq\Consumer
+    tusk_redis_mq.rpc_factory.class: Tusk\RedisMq\RpcFactory
+    tusk_redis_mq.monitor.class:     Tusk\RedisMq\Monitor
     
 services: ~
 

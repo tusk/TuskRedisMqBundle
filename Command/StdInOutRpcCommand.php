@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tusk RedisQueueBundle package.
+ * This file is part of the Tusk RedisMqBundle package.
  *
  * (c) 2012 Tusk PHP Components <frizzy@paperjaw.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Tusk\RedisQueueBundle\Command;
+namespace Tusk\RedisMqBundle\Command;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -24,8 +24,8 @@ class StdInOutRpcCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('tusk-redis-queue:stdin-stdout-rpc')
-            ->setDescription('TuskRedisQueue STDIN/STDOUT RPC command')
+            ->setName('tusk-redis-mq:stdin-stdout-rpc')
+            ->setDescription('TuskRedisMq STDIN/STDOUT RPC command')
             ->addArgument('rpc', InputArgument::REQUIRED, 'RPC handler name')
             ->addArgument('channel', InputArgument::REQUIRED, 'RPC channel');
     }
@@ -34,7 +34,7 @@ class StdInOutRpcCommand extends ContainerAwareCommand
     {
         $rpcFactory = $this->getContainer()->get(
             sprintf(
-                'tusk_redis_queue.rpc.%s',
+                'tusk_redis_mq.rpc.%s',
                 $input->getArgument('rpc')
             )
         );

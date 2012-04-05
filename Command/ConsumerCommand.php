@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Tusk RedisQueueBundle package.
+ * This file is part of the Tusk RedisMqBundle package.
  *
  * (c) 2012 Tusk PHP Components <frizzy@paperjaw.com>
  *
@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Tusk\RedisQueueBundle\Command;
+namespace Tusk\RedisMqBundle\Command;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
@@ -24,8 +24,8 @@ class ConsumerCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('tusk-redis-queue:consumer')
-            ->setDescription('TuskRedisQueue consumer command')
+            ->setName('tusk-redis-mq:consumer')
+            ->setDescription('TuskRedisMq consumer command')
             ->addArgument('consumer', InputArgument::REQUIRED, 'Consumer name')
             ->addOption('messages', 'm', InputOption::VALUE_OPTIONAL, 'Messages to consume', 0)
             ->addOption('listen', 'l', InputOption::VALUE_OPTIONAL, 'Listen timeout in seconds', 10);
@@ -41,7 +41,7 @@ class ConsumerCommand extends ContainerAwareCommand
         $messages = $input->getOption('messages');
         $consumer = $this->getContainer()->get(
             sprintf(
-                'tusk_redis_queue.consumer.%s',
+                'tusk_redis_mq.consumer.%s',
                 $input->getArgument('consumer')
             )
         );
