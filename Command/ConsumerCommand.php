@@ -64,7 +64,7 @@ class ConsumerCommand extends ContainerAwareCommand
         }
     }
 
-    private function trapSignal($signal)
+    public function trapSignal($signal)
     {
         echo 'Signal received. Ending process' . PHP_EOL;
         $this->abort = true;
