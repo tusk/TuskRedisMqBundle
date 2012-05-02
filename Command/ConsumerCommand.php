@@ -41,7 +41,7 @@ class ConsumerCommand extends ContainerAwareCommand
             pcntl_signal(SIGINT, array($this, 'trapSignal'));
             pcntl_signal(SIGTERM, array($this, 'trapSignal'));
             pcntl_signal(SIGCONT, array($this, 'trapSignal'));
-            pcntl_signal(SIGSTOP, array($this, 'trapSignal'));
+            pcntl_signal(SIGTSTP, array($this, 'trapSignal'));
         }
         $messages = $input->getOption('messages');
         $consumer = $this->getContainer()->get(
@@ -80,7 +80,7 @@ class ConsumerCommand extends ContainerAwareCommand
         case SIGCONT:
             $this->paused = false;
             break;
-        case SIGSTOP:
+        case SIGTSTP:
             $this->paused = true;
         }
     }
