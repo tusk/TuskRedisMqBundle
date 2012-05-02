@@ -29,7 +29,8 @@ class ConsumerCommand extends ContainerAwareCommand
             ->setDescription('TuskRedisMq consumer command')
             ->addArgument('consumer', InputArgument::REQUIRED, 'Consumer name')
             ->addOption('messages', 'm', InputOption::VALUE_OPTIONAL, 'Messages to consume', 0)
-            ->addOption('listen', 'l', InputOption::VALUE_NONE, 'Start in paused mode. Send SIGCONT to start', null);
+            ->addOption('listen', 'l', InputOption::VALUE_OPTIONAL, 'Listen timeout in seconds', 10)
+            ->addOption('paused', 'p', InputOption::VALUE_NONE, 'Start in paused mode. Send SIGCONT to start');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
