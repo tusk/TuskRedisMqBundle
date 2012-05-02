@@ -19,7 +19,8 @@ use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
 class ConsumerCommand extends ContainerAwareCommand
 {
-    protected $abort = false;
+    protected $abort  = false;
+    protected $paused = false;
 
     protected function configure()
     {
@@ -28,15 +29,19 @@ class ConsumerCommand extends ContainerAwareCommand
             ->setDescription('TuskRedisMq consumer command')
             ->addArgument('consumer', InputArgument::REQUIRED, 'Consumer name')
             ->addOption('messages', 'm', InputOption::VALUE_OPTIONAL, 'Messages to consume', 0)
-            ->addOption('listen', 'l', InputOption::VALUE_OPTIONAL, 'Listen timeout in seconds', 10);
+            ->addOption('listen', 'l', InputOption::VALUE_OPTIONAL, 'Listen timeout in seconds', 10)
+            ->addOption('paused', 'p', InputOption::VALUE_OPTIONAL, 'Start in paused mode. Send SIGCONT to start', null);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->paused = null !== $input->getOption('paused');
         if (function_exists('pcntl_signal')) {
             declare(ticks = 1);
             pcntl_signal(SIGINT, array($this, 'trapSignal'));
             pcntl_signal(SIGTERM, array($this, 'trapSignal'));
+            pcntl_signal(SIGCONT, array($this, 'trapSignal'));
+            pcntl_signal(SIGSTOP, array($this, 'trapSignal'));
         }
         $messages = $input->getOption('messages');
         $consumer = $this->getContainer()->get(
@@ -66,12 +71,33 @@ class ConsumerCommand extends ContainerAwareCommand
 
     public function trapSignal($signal)
     {
-        echo 'Signal received. Ending process' . PHP_EOL;
-        $this->abort = true;
+        switch ($signal) {
+        case SIGINT:
+        case SIGTERM:
+            echo 'Signal received. Ending process' . PHP_EOL;
+            $this->abort = true;
+            break;
+        case SIGCONT:
+            $this->paused = false;
+            break;
+        case SIGSTOP:
+            $this->paused = true;
+        }
     }
 
     private function checkStatus()
     {
+        if ($this->paused) {
+            while (true) {
+                if ($this->abort) {
+                    return false;
+                }
+                sleep(1);
+                if (false === $this->paused) {
+                    break;
+                }
+            }
+        }
         if ($this->abort) {
             return false;
         }
