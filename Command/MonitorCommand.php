@@ -54,7 +54,18 @@ class MonitorCommand extends ContainerAwareCommand
                 $output->writeLn('No channels');
             }
             foreach ($channels as $channel) {
-                $output->writeLn(' ' . $channel);
+                $output->writeLn(
+                    sprintf(
+                        ' %s %d',
+                        str_pad($channel, 24, ' ', STR_PAD_RIGHT),
+                        str_pad(
+                            $monitor->getChannelQueueLength($channel),
+                            7,
+                            ' ',
+                            STR_PAD_LEFT
+                        )
+                    )
+                );
             }
         }
     }
