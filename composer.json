@@ -16,7 +16,7 @@
     },
     "require": {
         "php": ">=5.3.2",
-        "tusk-tusk-redis-mq": "dev-master",
+        "tusk/tusk-redis-mq": "dev-master",
         "symfony/framework-bundle": "2.1.*",
         "symfony/yaml": "2.1.*"
     },
