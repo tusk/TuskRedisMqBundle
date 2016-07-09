@@ -54,14 +54,6 @@ class ConsumerCommand extends ContainerAwareCommand
         while ($this->checkStatus()) {
             if ($consumer->listen($input->getOption('listen'))) {
                 $messagesConsumed++;
-                if (! $input->getOption('quiet')) {
-                    $output->writeLn(
-                        sprintf(
-                            'Message consumed %d',
-                            $messagesConsumed
-                        )
-                    );
-                }
             }
             if ($messages != 0 && $messagesConsumed >= $messages) {
                 break;
